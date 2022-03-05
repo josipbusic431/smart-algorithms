@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research</title>
+    <link rel="stylesheet" href="../css/bulma.min.css">
+    <script src="../helpers/collection.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <style>
+        .card-header-title,
+        th {
+            background-color: #00d1b2;
+            color: white !important;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <p class="title">
+                Research
+            </p>
+            <p class="subtitle">
+              
+            </p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column">
+                    <div class="card">
+                        <header class="card-header">
+                            <p class="card-header-title has-primary">
+                                Description
+                            </p>
+                        </header>
+                        <div class="card-content">
+                            <div class="content">
+                                <p>Some description</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>          
+            <div class="columns">
+                <div class="column">
+                    <div class="card">
+                        <header class="card-header ">
+                            <p class="card-header-title">
+                                Data
+                            </p>
+                        </header>
+                        <div class="card-content">
+                            <div class="content">
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="columns">
+                
+                <div class="column">
+                    <div class="card">
+                        <header class="card-header">
+                            <p class="card-header-title">
+                                Algorithm
+                            </p>
+                        </header>
+                        <div class="card-content">
+                            <div class="content">
+                                <button class="button is-dark is-rounded" onclick="start()">Start</button>
+                                <!-- <button class="button is-danger is-rounded" onclick="">Stop</button> -->
+                                <br><br>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="columns">
+                <div class="column">
+                    <div class="card">
+                        <header class="card-header">
+                            <p class="card-header-title">
+                                Graph
+                            </p>
+                        </header>
+                        <div class="card-content">
+                            <div class="content">
+                                <button class="button is-dark is-rounded" onclick="refreshGraph()">Refresh
+                                    Graph</button>
+                                <br>
+                                <div>
+                                    <canvas id="myChart" height="50">
+                                    </canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+   
+    <script src="../helpers/mychart.js"></script>
+    <script src="../helpers/utils.js"></script>   
+    <script> 
+        //init random search
+        //const alg = new TabuSearch(50, 3, -5, 5);     
+       
+       
+        // function start() {
+        //     alg.start();
+        // }
+
+        function refreshGraph() {
+            //set params for graph
+            let labels = [];
+            for (let i = 0; i < alg.iter; i++) {
+                labels.push(i);
+            }
+            let candidates = alg.graphCand;
+            let best = alg.graphBest;          
+
+            // create datasets
+            let dataColor1 = utils.getRandomColor();
+            let data1 = new Dataset("candidate", candidates, dataColor1, dataColor1);
+            let dataColor2 = utils.getRandomColor();
+            while(dataColor2 == dataColor1){
+                dataColor2 = utils.getRandomColor();
+            }
+            let data2 = new Dataset("best", best, dataColor2, dataColor2);
+
+            //init graph config
+            var config = new MyChartConfig("line", labels, [data1.json(), data2.json()]);
+
+            if (window.myChart != null) {
+                try {
+                    window.myChart.destroy();
+                } catch (error) { }
+            }
+            window.myChart = new Chart(document.getElementById('myChart').getContext('2d'), config.config());
+            window.myChart.render();
+        }   
+    </script>
+</body>
+
+</html>
