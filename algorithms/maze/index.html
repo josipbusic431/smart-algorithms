@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maze</title>
+    <link rel="stylesheet" href="../../css/bulma.min.css">
+    <script src="../../helpers/collection.js"></script>
+    <style>
+        .card-header-title,
+        th {
+            background-color: #00d1b2;
+            color: white !important;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <p class="title">
+                Maze Generator
+            </p>
+            <p class="subtitle">               
+            </p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column">
+                    <div class="card">
+                        <header class="card-header">
+                            <p class="card-header-title has-primary">
+                                Maze
+                            </p>
+                        </header>
+                        <div class="card-content">
+                            <div class="content">
+                                <div class="columns">
+                                    <div class="column">
+                                        <button class="button is-dark is-rounded" onclick="genMaze()">Generate Maze</button>
+                                    </div>
+                                    <div class="column is-four-fifths">
+                                        <canvas id="mazeCanvas"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>                    
+    </section>   
+    <script src="../../helpers/utils.js"></script>
+    <script src="maze.js"></script>
+    <script> 
+        
+        var maze = MazeGenerator(10,5);
+        maze.draw();
+        
+    </script>
+</body>
+
+</html>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Search</title>
+    <title>Tabu Search</title>
     <link rel="stylesheet" href="../../css/bulma.min.css">
     <script src="../../helpers/collection.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
@@ -22,10 +22,10 @@
     <section class="hero is-primary">
         <div class="hero-body">
             <p class="title">
-                Random Search Algorithm
+                Tabu Search Algorithm
             </p>
             <p class="subtitle">
-               Throw the dice
+               It's TABOO :D
             </p>
         </div>
     </section>
@@ -42,26 +42,15 @@
                         </header>
                         <div class="card-content">
                             <div class="content">
-                                <p><i><b>Random Search</b></i> belongs to the fields of <i>Stochastic Optimization</i>
-                                    and <i>Global Optimization</i>.</p>
-                                <p>A <i><b>Random Search Algorithm</b></i> refers to an algorithm that uses some kind of
-                                    randomness
-                                    or probability. <i><b>Random Search</b></i> is the most simplest algorithm that you
-                                    can learn.
-                                    <i>(It's like learning a new programming language and writing 'hello world'
-                                        example).</i>
-                                </p>
-                                <p>What it basicly does is it generates a new <i>solution</i> for every iteration and
-                                    compares it with the best solution. When it find's the solution it breaks out of the
-                                    loop.</p>
-                                <p>In our example will be tasking <i><b>Random Search Algorithm</b></i> to find best
-                                    solution for <i><b>Knapsack problem</b></i>.</p>
-                                <p>In <i><b>Knapsack problem</b></i> we have a set of items. Every item has 2
-                                    properties: <i>weight</i> and <i>value</i>. The Knapsack has limited value that must
-                                    not be overlap.</p>
-                                <p>For more detail on this problem you can checkout on this link: <a
-                                        href="https://en.wikipedia.org/wiki/Knapsack_problem"><i>Knapsack wiki.</i></a>
-                                </p>
+                                <p><b>Tabu Search</b>(TS) is an algorithm that is similar to <i>population based algorithms</i>.TS is based on the idea 
+                                    that if a certain region of search space has already been visited during the search 
+                                    process, then it is tabu and the search algorithm is discouraged from visiting it 
+                                    again.</p>
+                                    <p> Similarly, if a certain search strategy has already been used during the search 
+                                        process, then that search strategy is tabu and the search algorithm is discouraged 
+                                        from using it again.</p>
+                                    <p>TS first generates an array of neighbors. Then it checks if any of the candidates in array is not in tabu list and if his evaluation is better that current best candidate. After when it finds the best candidate, the same candidate is compared to best solution.</p>
+                                    <p>At the end, TS check's is tabu list full, and then removes one element from the list, to make room for other solution.</p>
                             </div>
                         </div>
                     </div>
@@ -77,10 +66,10 @@
                         </header>
                         <div class="card-content">
                             <div class="content">
-                                <p>Jason Brownlee (2011): <i>Clever Algorithms: Nature-Inspired Programming Recipes</i>
+                                <p>Dan Simon (2013): <i>EVOLUTIONARY OPTIMIZATION ALGORITHMS: Biologically-Inspired and Population-Based Approaches to Computer Intelligence</i>
                                 </p>
-                                <p><a href="https://en.wikipedia.org/wiki/Random_search" target="_blank">Wikipedia -
-                                        Random Search</a></p>
+                                <p><a href="https://en.wikipedia.org/wiki/Tabu_search#:~:text=Example%3A%20the%20traveling%20salesman%20problem,-The%20traveling%20salesman&text=New%20solutions%20are%20created%20until,solution%20found%20during%20its%20execution." target="_blank">Wikipedia -
+                                    Tabu Search</a></p>
                             </div>
                         </div>
                     </div>
@@ -96,17 +85,22 @@
                         </header>
                         <div class="card-content">
                             <div class="content">
-                                <button class="button is-dark is-rounded" onclick="tbl.knapsack()">Generate Knapsack
-                                    Problem</button>
-                                <button class="button is-dark is-rounded" onclick="tbl.clearTable()">Clear
-                                    Table</button>
-                                <br><br>
-                                <table class="table is-striped" id="table">
-                                    <thead>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
+                                <div class="columns">
+                                    <div class="column">
+                                        <img src="Ackley.JPG" />
+                                    </div>
+                                    <div class="column">
+                                        <p>For TS we are gonna try to minimize <i>Ackley function</i>.</p>
+                                        <p><b>Ackley function</b> is a test functions, that is useful to evaluate characteristics of optimization algorithms, such as:</p>
+<ul>
+    <li>Convergence rate</li>
+    <li>Precision</li>
+    <li>Robustness</li>
+    <li>General performance</li> 
+</ul>
+<p>For other test functions checkout the link on Wikipedia (<a href="https://en.wikipedia.org/wiki/Test_functions_for_optimization">test functions for optimization</a>)</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -124,13 +118,22 @@
                         <div class="card-content">
                             <div class="content">
                                 <p>
-                                    <label><b>Knapsack weight</b></label>
-                                    <input class="input" id="weight" type="text" value="25" />
+                                    <label><b>Number of iteration</b></label>
+                                    <input class="input" id="iteration" type="number" value="50"/>
                                 </p>
                                 <p>
-                                    <label><b>Number of iteration</b></label>
-                                    <input class="input" id="iteration" type="number" value="100"/>
+                                    <label><b>Size of tabu list</b></label>
+                                    <input class="input" id="tabuListLength" type="text" value="3" />
                                 </p>
+                                <p>
+                                    <label><b>Min. search space</b></label>
+                                    <input class="input" id="minSpace" type="text" value="-5" />
+                                </p>
+                                <p>
+                                    <label><b>Max. search spacet</b></label>
+                                    <input class="input" id="maxSpace" type="text" value="5" />
+                                </p>
+                              
                                 <p>
                                     <button class="button is-dark is-rounded" onclick="setParams()">Set</button>
                                 </p>
@@ -186,39 +189,36 @@
                 </div>
             </div>
     </section>
-    <script src="../../helpers/table.js"></script>
-    <script src="random.js"></script>
+   
     <script src="../../helpers/mychart.js"></script>
     <script src="../../helpers/utils.js"></script>
-    <script>    
-        //set table
-        var tbl = new Table();
-        tbl.setTable("table");
-
+    <script src="tabu.js"></script>
+    <script> 
         //init random search
-        const rnd = new RandomSearch(tbl.rowCollection.collection, 25, 100);
-
-         //set properties
-         function setParams(){
+        const alg = new TabuSearch(50, 3, -5, 5);     
+       
+        //set properties
+        function setParams(){
             var iteration = document.getElementById("iteration");
-            let weight = document.getElementById("weight");
+            let maxSizeTabuList = document.getElementById("tabuListLength");
 
-            rnd.numberOfIteration = parseInt(iteration.value);
-            rnd._knapsackSize = parseInt(weight.value);
+            alg._numberOfIteration = parseInt(iteration.value);
+            alg._maxSizeTabuList = parseInt(maxSizeTabuList.value);
         }
 
         function start() {
-            rnd.start();
+            alg.start();
         }
 
         function refreshGraph() {
             //set params for graph
             let labels = [];
-            for (let i = 0; i < rnd.iter; i++) {
+            for (let i = 0; i < alg.iter; i++) {
                 labels.push(i);
             }
-            let candidates = rnd.costs;
-            let best = rnd.bestCosts;
+            let candidates = alg.graphCand;
+            let best = alg.graphBest;
+            debugger;
 
             // create datasets
             let dataColor1 = utils.getRandomColor();
@@ -239,10 +239,7 @@
             }
             window.myChart = new Chart(document.getElementById('myChart').getContext('2d'), config.config());
             window.myChart.render();
-        }
-        
-
-    
+        }   
     </script>
 </body>
 
