@@ -1,10 +1,53 @@
 function MazeGenerator(dimension, width){
 
     const _dimension = dimension;
-    const _width = width;
-    
+    const _width = width; 
+    let tree = [];
+    let maze = [];
 
-    const dfsTree = [];
+    let generate = function(){
+        fillTree();
+
+        let stack = [];
+        let current = tree[0];
+        current.visited = true;
+        stack.push(current.index);
+        maze.push(current.index);
+        
+        while(stack.length > 0){
+            let index = stack.pop();
+            current = tree[index];
+
+            //if(current.next.length > 0 && current.next.filter(n =>n.visited == false).length > 0){
+                if(current.next.length > 0 && current.next.filter(n =>n.visited == false).length > 0){
+                stack.push(current);
+                let neigbor = getRandomNeighbor(current.index);
+                //remove the wall 
+                neigbor.visited = true;
+                stack.push(neigbor);
+                maze.push(neigbor);
+                tree[neigbor.index].visited = true;
+            }
+        }
+        console.log("Maze")
+        console.log(maze);        
+    };
+
+    let fillTree = function(){        
+        for(let i = 0; i < _dimension; i++){
+            for(let j = 0; j < _dimension; j++){                
+                let cell = new Cell(toIndex(i,j));                
+                let neighbors = getNeighbor(i,j);
+
+                for(let z = 0; z < neighbors.length; z++){
+                    let current = new Cell(neighbors[z]);
+                    cell.next.push(current);
+                }
+                tree.push(cell);
+            }
+        }
+        console.log(tree);
+    };
     
     this.draw = function() {
         let canvas = document.getElementById("mazeCanvas");
@@ -34,42 +77,56 @@ function MazeGenerator(dimension, width){
                 ctx.beginPath(); 
                 ctx.moveTo(xoffset, y * lineWidth);
                 ctx.lineTo(xoffset, (y * lineWidth) + lineWidth);
-                ctx.stroke();
-               
-            }
-            
-           
+                ctx.stroke();               
+            }           
         }
-       
 
-        /*for (let i = 0; i < _dimension; i++) {
-            
-            ctx.beginPath();
+        //fill tree
+        generate();
+    };
+    
 
-            ctx.moveTo(i, Math.min(src.y, dest.y) - adjust);
+    let toRowColumn = function(index){      
+        this.x = Math.floor(index / _dimension);
+        this.y = index % _dimension;
+        return {x, y};
+    };
 
-            ctx.stroke();
-        }*/
+    let toIndex = function(row, column) {        
+        if (row < 0 || row >= _dimension) return null;
+        if (column < 0 || column >= _dimension) return null;
         
-        //new Promise(resolve => setTimeout(resolve, 10));
-    };   
+        return (row * _dimension) + column;
+    };
+       
+    let getNeighbor = function(row, column){
+        const up = toIndex(row - 1, column);
+        const down = toIndex(row + 1, column);
+        const left = toIndex(row, column - 1);
+        const right = toIndex(row, column + 1);
+        return [up, down, left, right].filter(n => n != null);
+    }
 
-    this.dfs = function(graph, cell){
-        cell.visited = true;        
-        for(let i=0; i < cell.next.length; i++){
-            if(!cell.next.visited)
-                this.dfs(cell.next, cell.next[i]);
-        }        
+    let getRandomNeighbor = function(index){
+        let {x, y} = toRowColumn(index);        
+        let neighbors = getNeighbor(x, y);
+        let notVisited = [];
+
+        for(let i = 0; i < neighbors.length; i++){
+            if(!tree[neighbors[i]].visited){
+                notVisited.push(neighbors[i]);
+            }
+        }       
+        return notVisited[utils.randomIntMax(notVisited.length)];
     };
 
 };
 
-function Cell(x, y){
-    this.x = x;
-    this.y = y;
+function Cell(index){
+    this.index = index;       
     this.visited = false;
     this.next = [];
-    
 
+   
 
 };
