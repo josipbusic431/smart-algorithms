@@ -60,10 +60,24 @@
                             <div class="content">
                                 <div class="columns">
                                     <div class="column">
-                                        <button class="button is-dark is-rounded" onclick="genMaze()">Generate Maze</button>
+                                        <p>
+                                            <label><b>Dimension</b></label>
+                                            <input class="input" id="dimension" type="text" value="10" />
+                                        </p>
+                                        <p>
+                                            <label><b>Line Width</b></label>
+                                            <input class="input" id="lineWidth" type="text" value="9" />
+                                        </p>
+                                        <p>
+                                            <button class="button is-dark is-rounded" onclick="setMazeParams()">Set</button>
+                                            <button class="button is-dark is-rounded" onclick="genMaze()">Generate Maze</button>
+                                        </p>   
                                     </div>
-                                    <div class="column">
-                                        <canvas id="canvasMaze" width="200" height="200"></canvas>
+                                    <div class="column">                                       
+                                        <p>
+                                            <canvas id="canvasMaze" width="200" height="200"></canvas>
+                                        </p>
+                                        
                                     </div>                         
                                 </div>
                             </div>
@@ -153,8 +167,26 @@
     <script src="../../helpers/mychart.js"></script>
     <script src="../../helpers/utils.js"></script>
     <script src="ga_maze.js"></script>
+    <script src="../maze/maze.js"></script>
     <script> 
-        //init random search
+        
+        let dimension = 15;
+        let lineWidth = 8;
+        var maze = new Maze("canvasMaze", dimension, lineWidth); 
+
+        function setMazeParams(){
+            dimension = document.getElementById("dimension");
+            lineWidth = document.getElementById("lineWidth");
+
+            dimension = parseInt(dimension.value);
+            lineWidth = parseInt(lineWidth.value);
+        }
+
+        function genMaze(){
+            maze = new Maze("canvasMaze", dimension, lineWidth);            
+        }
+
+        //init algorithm
         const alg = new GaMaze(150, 0.03, 0.8, 50, 20);     
        
         //set properties
@@ -168,26 +200,7 @@
 
         function start() {
             alg.start();
-        }
-
-        function genMaze(){
-            var mazeCanvas = document.getElementById("canvasMaze");
-            var ctx = mazeCanvas.getContext("2d");           
-
-            //set background color
-            ctx.fillStyle = "black";
-            ctx.fillRect(19, 19, mazeCanvas.width, mazeCanvas.height);
-
-            for(let i = 0; i < 10; i++){
-                for(let j = 0; j < 10; j++){
-                    ctx.fillStyle = "white";
-                    ctx.fillRect((i*20)+20, (j*20)+20, 19, 19);                    
-                }
-            }
-
- 
-        }
-        
+        }        
 
         function refreshGraph() {
             //set params for graph

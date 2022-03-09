@@ -1,6 +1,8 @@
-function Maze(){
-    const DIMENTION = 3;
-    const LINE_WIDTH = 5;
+function Maze(canvasControl, dimension, line_width){
+    const _canvasControl = canvasControl;
+
+    const DIMENTION = dimension;
+    const LINE_WIDTH = line_width;
   
     const start = 0;
     let end = 0;
@@ -83,7 +85,8 @@ function Maze(){
       const adjust = LINE_WIDTH / 2; // used to make sharp corners
       const borderWidth = adjust / 2;
   
-      const canvas = document.getElementById('mazeCanvas');
+      //const canvas = document.getElementById('mazeCanvas');
+      const canvas = document.getElementById(_canvasControl);
       canvas.setAttribute("width", DIMENTION*10);
       canvas.setAttribute("height", DIMENTION*10);
       const width = canvas.getAttribute('width') - (borderWidth * 2);
@@ -129,8 +132,8 @@ function Maze(){
         //await new Promise(resolve => setTimeout(resolve, 10));
       }
   
-      console.log(graph);
-      console.log(tree);
+      // console.log(graph);
+      // console.log(tree);
       // show start end end of maze
       paintIndex(ctx, start, 'lime', adjust, xStart, xSpace, yStart, ySpace);
       paintIndex(ctx, end, 'deepskyblue', adjust, xStart, xSpace, yStart, ySpace);
@@ -143,6 +146,6 @@ function Maze(){
       ctx.fillStyle = color;
       ctx.fillRect(x - adjust, y - adjust, LINE_WIDTH, LINE_WIDTH);
       ctx.fillStyle = '#333';
-    }
-  
+    }  
+
   };
