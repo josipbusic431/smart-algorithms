@@ -27,7 +27,6 @@
             </p>
         </div>
     </section>
-
     <section class="section">
         <div class="container">
             <div class="columns">
@@ -52,18 +51,46 @@
                         </div>
                     </div>
                 </div>
-            </div>                    
+            </div> 
+            <div class="columns">
+                <div class="column">
+                    <div class="card">
+                        <header class="card-header">
+                            <p class="card-header-title has-primary">
+                                Properties
+                            </p>
+                        </header>
+                        <div class="card-content">
+                            <div class="content">
+                                <div class="columns">
+                                    <div class="column">
+                                        <!-- <p>
+                                            <label><b>Gen size</b></label>
+                                            <input class="input" id="genSize" type="text" value="50" />
+                                        </p>
+                                        <p>
+                                            <label><b>Population size</b></label>
+                                            <input class="input" id="popSize" type="text" value="100" />
+                                        </p>
+                                        <button class="button is-dark is-rounded" onclick="setParams()">Set Params</button> -->
+                                    </div>
+                                    <!-- <div class="column">
+                                       
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>                   
     </section>   
     <script src="../../helpers/utils.js"></script>    
-    <script src="m.js"></script>
-    <script> 
-        //  var maze = new MazeGenerator(3,300);
-        //     maze.draw();
+    <script src="maze.js"></script>
+    <script>
         function genMaze(){
-            var maze = new Maze();
-            
+            var maze = new Maze();            
         }
-
         
        
 

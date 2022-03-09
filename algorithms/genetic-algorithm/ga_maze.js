@@ -1,11 +1,11 @@
-function GASimple(maxIteration, mutationRate, crossoverRate, numberOfIteration, populationSize){
+function GaMaze(maxIteration, mutationRate, crossoverRate, populationSize, genSize){
 
     //algoritham params
     let _maxIteration = maxIteration;
     let _mutationRate = mutationRate;
-    let _crossoverRate = crossoverRate;
-    let _numberOfIteration = numberOfIteration;    
+    let _crossoverRate = crossoverRate;   
     let _populationSize = populationSize;
+    let _genSize = genSize;
     let _best = undefined;
     let _population = [];
     

@@ -82,26 +82,21 @@
                         </header>
                         <div class="card-content">
                             <div class="content">
-                                <!-- <p>
-                                    <label><b>Number of iteration</b></label>
-                                    <input class="input" id="iteration" type="number" value="50"/>
+                                <p>
+                                    <label><b>Number Of Iterations</b></label>
+                                    <input class="input" id="interations" type="text" value="150" />
                                 </p>
                                 <p>
-                                    <label><b>Size of tabu list</b></label>
-                                    <input class="input" id="tabuListLength" type="text" value="3" />
+                                    <label><b>Gen size</b></label>
+                                    <input class="input" id="genSize" type="text" value="50" />
                                 </p>
                                 <p>
-                                    <label><b>Min. search space</b></label>
-                                    <input class="input" id="minSpace" type="text" value="-5" />
+                                    <label><b>Population size</b></label>
+                                    <input class="input" id="popSize" type="text" value="100" />
                                 </p>
                                 <p>
-                                    <label><b>Max. search spacet</b></label>
-                                    <input class="input" id="maxSpace" type="text" value="5" />
-                                </p>
-                              
-                                <p>
-                                    <button class="button is-dark is-rounded" onclick="setParams()">Set</button>
-                                </p> -->
+                                    <button class="button is-dark is-rounded" onclick="setParams()">Set Params</button>
+                                </p>                                
                             </div>
                         </div>
                     </div>
@@ -128,7 +123,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> 
                 </div>
             </div>
             <div class="columns">
@@ -157,10 +152,10 @@
    
     <script src="../../helpers/mychart.js"></script>
     <script src="../../helpers/utils.js"></script>
-    <script src="ga_simple.js"></script>
+    <script src="ga_maze.js"></script>
     <script> 
         //init random search
-        //const alg = new TabuSearch(50, 3, -5, 5);     
+        const alg = new GaMaze(150, 0.03, 0.8, 50, 20);     
        
         //set properties
         function setParams(){
@@ -202,7 +197,6 @@
             }
             let candidates = alg.graphCand;
             let best = alg.graphBest;
-            debugger;
 
             // create datasets
             let dataColor1 = utils.getRandomColor();
