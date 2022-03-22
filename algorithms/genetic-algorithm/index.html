@@ -170,9 +170,13 @@
     <script src="../maze/maze.js"></script>
     <script> 
         
-        let dimension = 15;
-        let lineWidth = 8;
+        let dimension = 3;
+        let lineWidth = 7;
         var maze = new Maze("canvasMaze", dimension, lineWidth); 
+
+        console.log(maze.mygraph);
+        //console.log(maze.tree);
+        //console.log(maze.visited);
 
         function setMazeParams(){
             dimension = document.getElementById("dimension");
@@ -183,7 +187,10 @@
         }
 
         function genMaze(){
-            maze = new Maze("canvasMaze", dimension, lineWidth);            
+            maze = new Maze("canvasMaze", dimension, lineWidth);  
+            // console.log(maze.graph);
+            // console.log(maze.tree);
+            // console.log(maze.visited);
         }
 
         //init algorithm

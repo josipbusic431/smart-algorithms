@@ -10,6 +10,7 @@ function Maze(canvasControl, dimension, line_width){
     const graph = [];
     const tree = [];
     const visited = {};
+    let mygraph = [];
   
     // add nodes to graph
     for (let i = 0; i < DIMENTION * DIMENTION; i++) {
@@ -17,18 +18,18 @@ function Maze(canvasControl, dimension, line_width){
         index: i,
         to: [],
       });
-    }
+    }    
+
+    explore(start, 0);
+    draw();
   
     // add edges
     for (let i = 0; i < DIMENTION * DIMENTION; i++) {
       const node = graph[i];
       const { up, down, left, right } = getNeighbors(i);
-      const edges = [up, down, right, left].filter(e => e);
+      const edges = [up, down, right, left].filter(e => e != null);
       node.edges = edges;
-    }
-  
-    explore(start, 0);
-    draw();
+    }    
   
     function explore(index, dist) {
       visited[index] = true;
@@ -105,7 +106,7 @@ function Maze(canvasControl, dimension, line_width){
   
       ctx.lineWidth = LINE_WIDTH;
       ctx.strokeStyle = 'white';
-  
+      
       for (let i = 0; i < tree.length; i++) {
         const pair = tree[i];
         const src = toRowColumn(pair[0]);
@@ -116,20 +117,23 @@ function Maze(canvasControl, dimension, line_width){
         dest.y = yStart + dest.column * ySpace;
   
         ctx.beginPath();
-  
+        mygraph.push(pair);
         // vertical
         if (src.x === dest.x) {
+          
           ctx.moveTo(src.x, Math.min(src.y, dest.y) - adjust);
           ctx.lineTo(dest.x, Math.max(src.y, dest.y) + adjust);
         }
         // horizontal
         else {
+          
           ctx.moveTo(Math.min(src.x, dest.x) - adjust, src.y);
           ctx.lineTo(Math.max(src.x, dest.x) + adjust, dest.y);
         }
         ctx.stroke();
   
-        //await new Promise(resolve => setTimeout(resolve, 10));
+        debugger;
+        await new Promise(resolve => setTimeout(resolve, 10));
       }
   
       // console.log(graph);
@@ -146,6 +150,19 @@ function Maze(canvasControl, dimension, line_width){
       ctx.fillStyle = color;
       ctx.fillRect(x - adjust, y - adjust, LINE_WIDTH, LINE_WIDTH);
       ctx.fillStyle = '#333';
-    }  
+    } 
+
+    Object.defineProperty(this, "graph", {
+      get: function(){return graph;}
+    });
+    Object.defineProperty(this, "mygraph", {
+      get: function(){return mygraph;}
+    });
+    Object.defineProperty(this, "tree", {
+      get: function(){return tree;}
+    });
+    Object.defineProperty(this, "visited", {
+      get: function(){return visited;}
+    });
 
   };
