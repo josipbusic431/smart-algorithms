@@ -28,6 +28,69 @@ function GeneticAlgorithmAllOnes(populationSize, mutationRate, crossoverRate, el
         }
         popl.fitness = fitness;
     };
+
+    this.isTerminalConditionMet = function(population){
+        for(const individual of population.population){
+            if(individual.fitness == 1){
+                return true;
+            }
+        }
+        return false;
+    };
+
+    this.printToConsole = function(text){
+        var txtArea = document.getElementById("console");
+        txtArea.innerHTML += text + "\n";
+    };
+
+    //roulette wheel
+    this.selectParent = function(population){
+        var individuals = population.population;
+
+        var popFitness = population.fitness;
+        var rouletteWheelPosition = Math.random() * popFitness;
+
+        var spinWheel = 0;
+        for(var individual of individuals){
+            spinWheel += individual.fitness;
+            if(spinWheel >= rouletteWheelPosition){
+                return JSON.stringify(individual);
+            }
+        }
+        return individuals[population.length() - 1];
+    };
+
+    this.crossover = function(population){
+        var newPopulation = new Population(population.length);
+        newPopulation.contrustor2();
+
+        for(var i = 0; i < population.length; i){
+            let parent1 = population.getFittest(i);
+            if(_crossoverRate > Math.random() && i > _elitismCount){
+                let parent2 = this.selectParent(population);
+
+                for(let j = 0; j < parent1.chromosome.length/2; j++){
+                    let tmp = parent1[j];
+                    parent1[j] = parent2[j];
+                    parent2[j] = tmp;                    
+                }
+                newPopulation[i] = parent2;               
+            } else{
+                newPopulation[i] = parent1;
+            }
+        }
+        return newPopulation;
+    };
+
+    this.mutation = function(population){
+        for(var i = 0; i < population.population; i++){
+            var chromosomes = population.population[i];
+            if(Math.random() < _mutationRate && i >= elitismCount){
+               var index = Math.random() *  (chromosomes.length - 1);
+               chromosomes[index] = chromosomes[index] == "0" ? "1" : "0";
+            }
+        }
+    }
 }
 
 function Population(populationSize, chromosomeLength){

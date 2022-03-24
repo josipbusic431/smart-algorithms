@@ -34,7 +34,7 @@
                     <div class="card">
                         <header class="card-header">
                             <p class="card-header-title has-primary">
-                                Maze
+                                Genetic Algorithm All Ones
                             </p>
                         </header>
                         <div class="card-content">
@@ -43,7 +43,15 @@
                                     <div class="column">                                       
                                     </div>
                                     <div class="column is-four-fifths">
-                                        <!-- <canvas id="mazeCanvas"></canvas> -->
+                                        <p>
+                                            <button class="button is-dark is-rounded" onclick="runGaAllOnes()">Run</button>
+                                        </p>
+                                        <p>
+                                        <label>Console:</label>
+                                        <textarea id="console" class="textarea is-small" placeholder=""
+                                            style="min-height:200px;" disabled></textarea>
+                                        <br>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -54,12 +62,36 @@
         </div>                   
     </section>   
     <script src="../../helpers/utils.js"></script>    
-    <script src="ga-all-ones.js"></script>  
-    
-    <script>
-        const gaAllOnes = new GeneticAlgorithmAllOnes(100, 0.01, 0.95, 0);
-        const population = gaAllOnes.initPopulation(50);
+    <script src="ga-all-ones.js"></script>      
+    <script>        
         
+        function runGaAllOnes(){
+            const gaAllOnes = new GeneticAlgorithmAllOnes(100, 0.01, 0.95, 0);
+            let population = gaAllOnes.initPopulation(50);
+
+            gaAllOnes.evalPopulation(population);
+            let generation = 1;
+
+           debugger;
+            while(!gaAllOnes.isTerminalConditionMet(population)){
+                gaAllOnes.printToConsole("Best solution: "+population.fitness);
+
+                //crossover
+                population = gaAllOnes.crossover(population);
+
+                //mutation
+                gaAllOnes.mutation(population);
+
+                //evaluation
+                gaAllOnes.evalPopulation(population);
+
+                generation++;
+            }
+
+            gaAllOnes.printToConsole("FOUND SOLUTION!!!");
+            gaAllOnes.printToConsole("@ Generation:"+generation);
+            gaAllOnes.printToConsole("Best solution:"+ JSON.stringify(population.getFittest(0)));
+        };
        
 
     </script>
