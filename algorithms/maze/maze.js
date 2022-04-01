@@ -133,7 +133,7 @@ function Maze(canvasControl, dimension, line_width){
         ctx.stroke();
   
         debugger;
-        await new Promise(resolve => setTimeout(resolve, 10));
+        await new Promise(resolve => setTimeout(resolve, 1000));
       }
   
       // console.log(graph);

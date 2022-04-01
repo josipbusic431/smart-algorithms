@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maze</title>
+    <title>Genetic Alg Tutorial</title>
     <link rel="stylesheet" href="../../css/bulma.min.css">
     <script src="../../helpers/collection.js"></script>
     <style>
@@ -21,7 +21,7 @@
     <section class="hero is-primary">
         <div class="hero-body">
             <p class="title">
-                Maze Generator
+                Genetic Algorithm Tutorial
             </p>
             <p class="subtitle">               
             </p>
@@ -34,16 +34,24 @@
                     <div class="card">
                         <header class="card-header">
                             <p class="card-header-title has-primary">
-                                Graphs
+                                Genetic Algorithm All Ones
                             </p>
                         </header>
                         <div class="card-content">
                             <div class="content">
                                 <div class="columns">
-                                    <div class="column">
+                                    <div class="column">                                       
                                     </div>
                                     <div class="column is-four-fifths">
-                                        <canvas id="myCanvas"></canvas>
+                                        <p>
+                                            <button class="button is-dark is-rounded" onclick="runGaAllOnes()">Run</button>
+                                        </p>
+                                        <p>
+                                        <label>Console:</label>
+                                        <textarea id="console" class="textarea is-small" placeholder=""
+                                            style="min-height:200px;" disabled></textarea>
+                                        <br>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -53,16 +61,14 @@
             </div>             
         </div>                   
     </section>   
-    <script src="../../helpers/utils.js"></script>       
-    <!-- <script src="graphs.js"></script> -->
-    <!-- <script src="haspath.js"></script> -->
-    <!-- <script src="edge-problem.js"></script> -->
-    <!-- <script src="connected-components-count.js"></script> -->
-    <!-- <script src="shortest-path.js"></script> -->
-    <script src="island-count.js"></script>
-    <script>
+    <script src="../../helpers/utils.js"></script>    
+    <script src="test.js"></script>      
+    <script>        
         
-        
+        function runGaAllOnes(){
+           var test = new TestClass();
+           test.start();
+        };
        
 
     </script>
