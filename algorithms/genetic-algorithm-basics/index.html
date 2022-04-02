@@ -23,7 +23,7 @@
             <p class="title">
                 Genetic Algorithm Tutorial
             </p>
-            <p class="subtitle">               
+            <p class="subtitle">
             </p>
         </div>
     </section>
@@ -40,17 +40,18 @@
                         <div class="card-content">
                             <div class="content">
                                 <div class="columns">
-                                    <div class="column">                                       
+                                    <div class="column">
                                     </div>
                                     <div class="column is-four-fifths">
                                         <p>
-                                            <button class="button is-dark is-rounded" onclick="runGaAllOnes()">Run</button>
+                                            <button class="button is-dark is-rounded"
+                                                onclick="runGaAllOnes()">Run</button>
                                         </p>
                                         <p>
-                                        <label>Console:</label>
-                                        <textarea id="console" class="textarea is-small" placeholder=""
-                                            style="min-height:200px;" disabled></textarea>
-                                        <br>
+                                            <label>Console:</label>
+                                            <textarea id="console" class="textarea is-small" placeholder=""
+                                                style="min-height:200px;" disabled></textarea>
+                                            <br>
                                         </p>
                                     </div>
                                 </div>
@@ -58,40 +59,38 @@
                         </div>
                     </div>
                 </div>
-            </div>             
-        </div>                   
-    </section>   
-    <script src="../../helpers/utils.js"></script>    
-    <script src="ga-all-ones.js"></script>      
-    <script>        
-        
-        function runGaAllOnes(){
-            const gaAllOnes = new GeneticAlgorithmAllOnes(100, 0.01, 0.95, 0);
-            let population = gaAllOnes.initPopulation(50);
+            </div>
+        </div>
+    </section>
+    <script src="../../helpers/utils.js"></script>
+    <!-- <script src="ga-all-ones.js"></script>       -->
+    <script src="all-ones/example.js"></script>
+    <script>
 
-            gaAllOnes.evalPopulation(population);
-            let generation = 1;
+        async function runGaAllOnes() {
+           
+                var ga = new GeneticAlgorithmAllOnes(100, 50, 0.01, 0.95, 0);
+                var population = ga.initPopulation();
 
-           debugger;
-            while(!gaAllOnes.isTerminalConditionMet(population)){
-                gaAllOnes.printToConsole("Best solution: "+population.fitness);
+                ga.evalPopulation(population);
+                var generation = 1;
 
-                //crossover
-                population = gaAllOnes.crossover(population);
+                while (!ga.isTerminalConditionMet(population)) {
+                    ga.printToConsole("Generation:#" + generation + "Best solution: " + population.fitness);                    
+                    //debugger;
+                    population = ga.crossover(population);
+                    ga.mutation(population);
+                    ga.evalPopulation(population);
+                    generation++;
 
-                //mutation
-                gaAllOnes.mutation(population);
+                    await new Promise(function(resolve, reject) { resolve("0") });
+                }
+                ga.printToConsole("FOUND SOLUTION!!!");
+                ga.printToConsole("@ Generation:" + generation);
+                ga.printToConsole("Best solution:" + JSON.stringify(population.getFittest(0)));
+                      
+        }
 
-                //evaluation
-                gaAllOnes.evalPopulation(population);
-
-                generation++;
-            }
-
-            gaAllOnes.printToConsole("FOUND SOLUTION!!!");
-            gaAllOnes.printToConsole("@ Generation:"+generation);
-            gaAllOnes.printToConsole("Best solution:"+ JSON.stringify(population.getFittest(0)));
-        };
        
 
     </script>
