@@ -156,14 +156,27 @@
        var matrix = new Matrix();
        //var m2 = new Matrix();
 
-       let m1 = [[1,2,3],
-                    [4,5,6]];
+    //    let m1 = [[1, 2, 3],
+    //              [4, 5, 6]];
 
-       let m2 = [[7,8],
-                      [9,10],
-                      [11, 12]];
+    //    let m2 = [[7, 8],
+    //              [9, 10],
+    //              [11, 12]];
 
-        console.log("MATRIX:")
+        let m1 = [[3,4,2]];
+
+        let m2 = [[120, 90, 60], 
+                  [80, 70, 40], 
+                  [60, 40, 20]];
+
+        const tensorA = [[1, 2], [3, 4], [5, 6]];
+        const tensorB = [[1,-1], [2,-2], [3,-3]];
+        console.log(matrix.addMatrices(tensorA, tensorB))
+    
+        // let m1 = [[1, 2], [3, 4]];
+        // let m2 = [[5, 6], [7, 8]];
+
+        console.log("MATRIX:");
         let result = matrix.multMatrices(m1, m2);
         console.log(result);
     

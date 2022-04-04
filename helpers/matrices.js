@@ -72,7 +72,7 @@ function Matrix() {
     };
 
     this.addMatrices = function (matrixA, matrixB) {
-        if (this.equalDimesion(matrixA, matrixB)) {
+        if (!this.equalDimesion(matrixA, matrixB)) {
             return "Matrices are not the same dimesnions!"
         }
 
@@ -88,7 +88,7 @@ function Matrix() {
     };
 
     this.subMatrices = function (matrixA, matrixB) {
-        if (this.equalDimesion(matrixA, matrixB)) {
+        if (!this.equalDimesion(matrixA, matrixB)) {
             return "Matrices are not the same dimesnions!"
         }
 
@@ -103,26 +103,43 @@ function Matrix() {
         return newMatrix;
     };
 
-    this.multMatrices = function (matrixA, matrixB) {        
+    this.multMatrices = function (matrixA, matrixB) {
         if (matrixA[0].length != matrixB.length) {
             return "matrices cannot be mutipled!";
         }
 
         let newMatrix = [];
-        while(newMatrix.length < matrixA.length) {                      
-            for (let i = 0; i < matrixA[0].length; i++) {
-                let product = 0;
-                let column = []; 
-                for (let k = 0; k < matrixB[0].length; k++) {
-                    for (let j = 0; j < matrixB.length; j++) {
-                        product += matrixA[i][j] * matrixB[j][k];
-                    }
-                    column.push(product);
-                } 
-                newMatrix.push(column);                           
-            }           
+        for (let i = 0; i < matrixA.length; i++) {
+            let column = [];
+            var a1 = getRow(matrixA, i, matrixA[0].length);
+            for (let k = 0; k < matrixB[0].length; k++) {
+                var product = 0;
+                var a2 = getColumn(matrixB, k, matrixB.length);
+                for (let j = 0; j < a1.length; j++) {
+                    product += a1[j] * a2[j];
+                }
+                column.push(product);
+            }
+            newMatrix.push(column);
         }
+
         return newMatrix;
+    };
+
+    let getRow = function (matrix, row, size) {
+        let arr = [];
+        for (let i = 0; i < size; i++) {
+            arr.push(matrix[row][i]);
+        }
+        return arr;
+    };
+
+    let getColumn = function (matrix, column, size) {
+        let arr = [];
+        for (let i = 0; i < size; i++) {
+            arr.push(matrix[i][column]);
+        }
+        return arr;
     };
 
     this.scalarMultiple = function (matrixA, value) {
