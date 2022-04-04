@@ -101,6 +101,7 @@ function GeneticAlgorithmAllOnes(populationSize, genSize, mutationRate, crossove
     this.printToConsole = function(text){
         var txtArea = document.getElementById("console");
         txtArea.innerHTML += text + "\n";
+        txtArea.scrollTop = txtArea.scrollHeight;
     };
 
     let select = function(population){

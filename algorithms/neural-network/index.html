@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Networks</title>
+    <link rel="stylesheet" href="../../css/bulma.min.css">
+    <script src="../../helpers/collection.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <style>
+        .card-header-title,
+        th {
+            background-color: #00d1b2;
+            color: white !important;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <p class="title">
+                Neural Networks
+            </p>
+            <p class="subtitle">
+            </p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column">
+                    <div class="card">
+                        <header class="card-header">
+                            <p class="card-header-title has-primary">
+                                Description
+                            </p>
+                        </header>
+                        <div class="card-content">
+                            <div class="content">
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+            <div class="columns">
+                <div class="column">
+                    <div class="card">
+                        <header class="card-header ">
+                            <p class="card-header-title">
+                                Data
+                            </p>
+                        </header>
+                        <div class="card-content">
+                            <div class="content">
+                                <div class="columns">
+                                    <div class="column">
+                                       
+                                        
+                                    </div>                         
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="columns">
+                <div class="column is-two-fifths">
+                    <div class="card">
+                        <header class="card-header">
+                            <p class="card-header-title">
+                                Properties
+                            </p>
+                        </header>
+                        <div class="card-content">
+                            <div class="content">
+                                <!-- <p>
+                                    <label><b>Input</b></label>
+                                    <input class="input" id="interations" type="text" value="150" />
+                                </p>
+                                <p>
+                                    <label><b>Gen size</b></label>
+                                    <input class="input" id="genSize" type="text" value="50" />
+                                </p>
+                                <p>
+                                    <label><b>Population size</b></label>
+                                    <input class="input" id="popSize" type="text" value="100" />
+                                </p>
+                                <p>
+                                    <button class="button is-dark is-rounded" onclick="setParams()">Set Params</button>
+                                </p>                                 -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="card">
+                        <header class="card-header">
+                            <p class="card-header-title">
+                                Algorithm
+                            </p>
+                        </header>
+                        <div class="card-content">
+                            <div class="content">
+                                <button class="button is-dark is-rounded" onclick="start()">Start</button>
+                                <!-- <button class="button is-danger is-rounded" onclick="">Stop</button> -->
+                                <br><br>
+                                <div class="columns">
+                                    <div class="column">
+                                        <label>Console:</label>
+                                        <textarea id="console" class="textarea is-small" placeholder=""
+                                            style="min-height:200px;" disabled></textarea>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+            <div class="columns">
+                <div class="column">
+                    <div class="card">
+                        <header class="card-header">
+                            <p class="card-header-title">
+                                Graph
+                            </p>
+                        </header>
+                        <div class="card-content">
+                            <div class="content">
+                                <button class="button is-dark is-rounded" onclick="refreshGraph()">Refresh
+                                    Graph</button>
+                               <br>
+                                <div>
+                                    <canvas id="myChart" height="50">
+                                    </canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+   
+    <script src="../../helpers/mychart.js"></script>
+    <script src="../../helpers/utils.js"></script>
+    <script src="neural.js"></script>
+    <script src="../../helpers/matrices.js"></script>
+    <script> 
+        
+       var matrix = new Matrix();
+       //var m2 = new Matrix();
+
+       let m1 = [[1,2,3],
+                    [4,5,6]];
+
+       let m2 = [[7,8],
+                      [9,10],
+                      [11, 12]];
+
+        console.log("MATRIX:")
+        let result = matrix.multMatrices(m1, m2);
+        console.log(result);
+    
+        // var neural = new NeuralNetwork(2, 2, 3, 8);
+        // var i_data = neural.setData(neural.batchSize, neural.input_nodes);
+        // var w1 = neural.setData(neural.input_nodes, neural.hidden_nodes);
+        // console.log(i_data);
+        // console.log(w1)
+
+
+
+      
+    </script>
+</body>
+
+</html>
