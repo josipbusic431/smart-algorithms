@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plot Examples</title>
+    <link rel="stylesheet" href="../../css/bulma.min.css">
+    <script src="../../helpers/collection.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <style>
+        .card-header-title,
+        th {
+            background-color: #00d1b2;
+            color: white !important;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <p class="title">
+                Plot Examples
+            </p>
+            <p class="subtitle">
+            </p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column">
+                    <div class="card">
+                        <header class="card-header">
+                            <p class="card-header-title has-primary">
+                                Graphs
+                            </p>
+                        </header>
+                        <div class="card-content">
+                            <div class="content">
+                               <canvas id="linearplot"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>          
+    </section>
+   
+   <script src="plotlib.js"></script>
+    <script> 
+        
+       var matrix = new Matrix();
+       //var m2 = new Matrix();
+
+    //    let m1 = [[1, 2, 3],
+    //              [4, 5, 6]];
+
+    //    let m2 = [[7, 8],
+    //              [9, 10],
+    //              [11, 12]];
+
+        let m1 = [[3,4,2]];
+
+        let m2 = [[120, 90, 60], 
+                  [80, 70, 40], 
+                  [60, 40, 20]];
+
+        const tensorA = [[1, 2], [3, 4], [5, 6]];
+        const tensorB = [[1,-1], [2,-2], [3,-3]];
+        console.log(matrix.addMatrices(tensorA, tensorB))
+    
+        // let m1 = [[1, 2], [3, 4]];
+        // let m2 = [[5, 6], [7, 8]];
+
+        console.log("MATRIX:");
+        let result = matrix.multMatrices(m1, m2);
+        console.log(result);
+    
+        // var neural = new NeuralNetwork(2, 2, 3, 8);
+        // var i_data = neural.setData(neural.batchSize, neural.input_nodes);
+        // var w1 = neural.setData(neural.input_nodes, neural.hidden_nodes);
+        // console.log(i_data);
+        // console.log(w1)
+
+
+
+      
+    </script>
+</body>
+
+</html>
