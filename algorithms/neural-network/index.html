@@ -79,21 +79,6 @@
                         </header>
                         <div class="card-content">
                             <div class="content">
-                                <!-- <p>
-                                    <label><b>Input</b></label>
-                                    <input class="input" id="interations" type="text" value="150" />
-                                </p>
-                                <p>
-                                    <label><b>Gen size</b></label>
-                                    <input class="input" id="genSize" type="text" value="50" />
-                                </p>
-                                <p>
-                                    <label><b>Population size</b></label>
-                                    <input class="input" id="popSize" type="text" value="100" />
-                                </p>
-                                <p>
-                                    <button class="button is-dark is-rounded" onclick="setParams()">Set Params</button>
-                                </p>                                 -->
                             </div>
                         </div>
                     </div>
@@ -180,14 +165,17 @@
         console.log(o_data_prediction);
 
         //LOSS function
-        let diff = matrices.subMatrices(matrices.squareMatrix(o_data_prediction), matrices.squareMatrix(o_data));        
-        console.log("DIFF")
-        console.log(diff);
+        let loss = matrices.subMatrices(matrices.squareMatrix(o_data_prediction), matrices.squareMatrix(o_data));        
+        console.log("LOSS:")
+        console.log(loss);
 
-        console.log(matrices.sum(diff, true));
+        console.log(matrices.sum(loss, true));
 
-        
-
+        let grad_pred = matrices. matrices.subMatrices(o_data_prediction, o_data);      
+        let grad_w2 = 
+        let grad_h_relu = 
+        let grad_h_values = 
+        let grad_w1 = 
 
     </script>
 </body>

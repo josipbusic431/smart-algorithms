@@ -188,7 +188,8 @@
     </section>
     <script src="../../helpers/table.js"></script>
     <script src="random.js"></script>
-    <script src="../../helpers/mychart.js"></script>
+    <!-- <script src="../../helpers/mychart.js"></script> -->
+    <script src="../plotter/plotlib.js"></script>
     <script src="../../helpers/utils.js"></script>
     <script>    
         //set table
@@ -212,33 +213,13 @@
         }
 
         function refreshGraph() {
-            //set params for graph
             let labels = [];
             for (let i = 0; i < rnd.iter; i++) {
                 labels.push(i);
-            }
-            let candidates = rnd.costs;
-            let best = rnd.bestCosts;
+            }           
 
-            // create datasets
-            let dataColor1 = utils.getRandomColor();
-            let data1 = new Dataset("candidate", candidates, dataColor1, dataColor1);
-            let dataColor2 = utils.getRandomColor();
-            while(dataColor2 == dataColor1){
-                dataColor2 = utils.getRandomColor();
-            }
-            let data2 = new Dataset("best", best, dataColor2, dataColor2);
-
-            //init graph config
-            var config = new MyChartConfig("line", labels, [data1.json(), data2.json()]);
-
-            if (window.myChart != null) {
-                try {
-                    window.myChart.destroy();
-                } catch (error) { }
-            }
-            window.myChart = new Chart(document.getElementById('myChart').getContext('2d'), config.config());
-            window.myChart.render();
+            var plot = new Plotter("myChart","line");
+            plot.show(labels, rnd.costs, "Candidates", rnd.bestCosts, "Best");           
         }
         
 
