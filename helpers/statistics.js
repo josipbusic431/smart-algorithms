@@ -7,6 +7,10 @@ function Statistics(){
 
     };
 
+    this.totalSum = function(data){
+     
+    };
+
     this.calcMean = function(){
         let sum = 0;
         for(let d of data){
@@ -15,9 +19,7 @@ function Statistics(){
     };
     this.calcVariance = function(data){
         let sum = 0;
-        for(let d of data){
-            
-        }
+       
     };
 
     this.summary = function(){

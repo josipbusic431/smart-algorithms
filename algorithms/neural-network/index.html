@@ -152,43 +152,43 @@
     <script src="neural.js"></script>
     <script src="../../helpers/matrices.js"></script>
     <script> 
+       
+        var matrices = new Matrix();
+
+        var neural = new NeuralNetwork(2, 2, 3, 8);
         
-       var matrix = new Matrix();
-       //var m2 = new Matrix();
+        let i_data = neural.setData(neural.batchSize, neural.input_nodes);
+        console.log("INPUT VALUES:");
+        console.log(i_data);
 
-    //    let m1 = [[1, 2, 3],
-    //              [4, 5, 6]];
+        let o_data = neural.setData(neural.batchSize, neural.output_nodes);   
 
-    //    let m2 = [[7, 8],
-    //              [9, 10],
-    //              [11, 12]];
+        //weights
+        let w1 = neural.setData(neural.input_nodes, neural.hidden_nodes);
+        let w2 = neural.setData(neural.hidden_nodes, neural.output_nodes);
+        console.log("WEIGHTS VALUES:");
+        console.log(w1);
 
-        let m1 = [[3,4,2]];
+        let h_values = matrices.multMatrices(i_data, w1);
+        console.log("HIDDEN LAYER VALUES:");
+        console.log(h_values);
 
-        let m2 = [[120, 90, 60], 
-                  [80, 70, 40], 
-                  [60, 40, 20]];
+        //Activation function: Rectified Linear Unit (ReLU)
+        
+        let o_data_prediction = matrices.multMatrices(h_values, w2);
+        console.log("OUTPUT PREDICTION VALUES:");
+        console.log(o_data_prediction);
 
-        const tensorA = [[1, 2], [3, 4], [5, 6]];
-        const tensorB = [[1,-1], [2,-2], [3,-3]];
-        console.log(matrix.addMatrices(tensorA, tensorB))
-    
-        // let m1 = [[1, 2], [3, 4]];
-        // let m2 = [[5, 6], [7, 8]];
+        //LOSS function
+        let diff = matrices.subMatrices(matrices.squareMatrix(o_data_prediction), matrices.squareMatrix(o_data));        
+        console.log("DIFF")
+        console.log(diff);
 
-        console.log("MATRIX:");
-        let result = matrix.multMatrices(m1, m2);
-        console.log(result);
-    
-        // var neural = new NeuralNetwork(2, 2, 3, 8);
-        // var i_data = neural.setData(neural.batchSize, neural.input_nodes);
-        // var w1 = neural.setData(neural.input_nodes, neural.hidden_nodes);
-        // console.log(i_data);
-        // console.log(w1)
+        console.log(matrices.sum(diff, true));
+
+        
 
 
-
-      
     </script>
 </body>
 

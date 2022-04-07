@@ -53,23 +53,21 @@ function Candidate(){
 }
 
 function Select(){
-
     this.tournament = function(population, k){
         let parents = [];
         let indexes = [];
        
         while(parents.length < k){
-            let index = utils.randomIntMax(population.lenngth - 1);
+            let index = utils.randomIntMax(population.length - 1);
             if(!indexes.includes(index)){
                 indexes.push(index);
                 parents.push(population[index]);
             }
-        }
-        
+        }        
         //sort array
         indexes = indexes.sort((a,b) => a - b);
-
         
+        return [indexes[0], indexes[1]];
     };
 
     this.roulete = function(population, totalSum){
@@ -89,7 +87,6 @@ function Select(){
 };
 
 function Crossover(){
-
     this.onePoint = function(child1, child2){
         let point = Utils.randomIntMax(child1.length);
 
@@ -125,11 +122,16 @@ function Crossover(){
 function Mutation(){
 
     this.oneTime = function(parent){
-
+        var index = utils.randomIntMax(parent.length - 1);
+        parent[index] = parent[index] == "0" ? "1" : "0";
+        return parent;
     };
 
     this.nTimes = function(parent, times){
-
+        for(var i = 0; i < times; i++){
+            this.oneTime(parent);
+        }
+        return parent;
     };
 
 };

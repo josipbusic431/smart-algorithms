@@ -1,6 +1,18 @@
 function Matrix() {
     this.matrix = [];
 
+    this.squareMatrix = function(data){
+        let matrix = [];
+        for (var i = 0; i < data.length; i++) {
+            let column = [];
+            for (var j = 0; j < data[0].length; j++) {
+                column.push(Math.pow(data[i][j],2));
+            }
+            matrix.push(column);
+        }
+        return matrix;
+    };
+
     this.dimesionalMatrix = function (x, y, from, to) {
         let matrix = [];
         for (var i = 0; i < x; i++) {
@@ -11,10 +23,6 @@ function Matrix() {
             matrix.push(column);
         }
         return matrix;
-    };
-
-    this.squareMatrix = function (x, from, to) {
-        return this.dimesionalMatrix(x, x, from, to);
     };
 
     this.scalarMatrix = function (x, y, value) {
@@ -166,5 +174,15 @@ function Matrix() {
         return newMatrix;
     };
 
+    this.sum = function(matrix, isSquare){       
+        var sum = 0;
+        for (var i = 0; i < matrix.length; i++) {
+            for (var j = 0; j < matrix[0].length; j++) {
+                if(!isSquare) sum += matrix[i][j];
+                else sum += Math.pow(matrix[i][j], 2);
+            }
+        }
+        return sum;
+    };
 
 };
