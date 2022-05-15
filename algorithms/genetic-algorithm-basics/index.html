@@ -75,7 +75,7 @@
                 ga.evalPopulation(population);
                 var generation = 1;
 
-                while (!ga.isTerminalConditionMet(population) || generation < 1000) {
+                while (!ga.isTerminalConditionMet(population) && generation < 500) {
                     ga.printToConsole("Generation:#" + generation + "   Best solution: " + population.fitness);                    
                     //debugger;
                     population = ga.crossover(population);
@@ -85,6 +85,7 @@
 
                     await new Promise(resolve => setTimeout(resolve, 10));
                 }
+                ga.printToConsole("");
                 ga.printToConsole("FOUND SOLUTION!!!");
                 ga.printToConsole("@ Generation:" + generation);
                 ga.printToConsole("Best solution:" + JSON.stringify(population.getFittest(0)));

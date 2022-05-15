@@ -24,7 +24,7 @@ function GaMaze(maxIteration, mutationRate, crossoverRate, populationSize, genSi
         graphBest = [];
 
         for(let i = 0; i < _maxIteration; i++){
-
+            
         }
 
     };

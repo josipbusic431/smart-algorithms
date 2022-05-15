@@ -138,51 +138,9 @@
     <script src="../../helpers/matriceslib.js"></script>
     <script> 
        
-        //var matrices = new Matrix();
-        var i_data = new Matrix();
-        var o_data = new Matrix();
-        var w1 = new Matrix();
-        var w2 = new Matrix();
-        var h_values = new Matrix();
-        var o_data_prediction = new Matrix();
-
-        var neural = new NeuralNetwork(2, 2, 3, 8);
+      
         
-        i_data.matrix = neural.setData(neural.batchSize, neural.input_nodes);
-        console.log("INPUT VALUES:");
-        console.log(i_data.matrix);
-
-        o_data.matrix = neural.setData(neural.batchSize, neural.output_nodes);   
-
-        //weights
-        w1.matrix = neural.setData(neural.input_nodes, neural.hidden_nodes);
-        w2.matrix = neural.setData(neural.hidden_nodes, neural.output_nodes);
-        console.log("WEIGHTS VALUES:");
-        console.log(w1.matrix);
-
-        h_values = i_data.dot(w1.matrix);
-        console.log("HIDDEN LAYER VALUES:");
-        console.log(h_values.matrix);
-
-        //Activation function: Rectified Linear Unit (ReLU)
-        
-        o_data_prediction = h_values.dot(w2);
-        console.log("OUTPUT PREDICTION VALUES:");
-        console.log(o_data_prediction.matrix);
-
-        //LOSS function
-
-        let loss = matrices.subMatrices(o_data_prediction.squared(), o_data.squared());        
-        console.log("LOSS:")
-        console.log(loss);
-
-        console.log(matrices.sum(loss, true));
-
-        let grad_pred = matrices. matrices.subMatrices(o_data_prediction, o_data);      
-        // let grad_w2 = 
-        // let grad_h_relu = 
-        // let grad_h_values = 
-        // let grad_w1 = 
+       
 
     </script>
 </body>

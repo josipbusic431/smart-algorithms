@@ -100,19 +100,19 @@ function Matrix(data){
     };
 
     this.dot = function (matrixA) {
-        if (matrixA[0].length != this.matrix.length) {
+        if (this.matrix[0].length != matrixA.length) {
             return "matrices cannot be mutipled!";
         }
 
         let newMatrix = [];
-        for (let i = 0; i < matrixA.length; i++) {
+        for (let i = 0; i < this.matrix.length; i++) {
             let column = [];
-            var a1 = getRow(matrixA, i, matrixA[0].length);
-            for (let k = 0; k < this.matrix[0].length; k++) {
+            var a1 = getRow(this.matrix, i, this.matrix[0].length);
+            for (let k = 0; k < matrixA[0].length; k++) {
                 var product = 0;
-                var a2 = getColumn(this.matrix, k, this.matrix.length);
+                var a2 = getColumn(matrixA, k, matrixA.length);
                 for (let j = 0; j < a1.length; j++) {
-                    product += (a1[j] * a2[j]);
+                    product += a1[j] * a2[j];
                 }
                 column.push(product);
             }
@@ -187,7 +187,20 @@ function Matrix(data){
             }
             newMatrix.push(column);
         }        
-        this.matrix = newMatrix;
+        //this.matrix = newMatrix;
+        return newMatrix;
+    };
+
+    this.transpose = function(){
+        let newMatrix = [];
+        for(var i = 0; i < this.matrix[0].length; i++){
+            let column = [];
+            for(var j = 0; j < this.matrix.length; j++){
+                column.push(this.matrix[j][i]);
+            }
+            newMatrix.push(column);
+        }
+        return newMatrix;
     };
 
     let getRow = function (matrix, row, size) {
@@ -204,8 +217,6 @@ function Matrix(data){
             arr.push(matrix[i][column]);
         }
         return arr;
-    };
-
-    
+    };   
 
 };
