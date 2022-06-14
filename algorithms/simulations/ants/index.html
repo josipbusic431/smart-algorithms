@@ -5,15 +5,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plot Examples</title>
-    <link rel="stylesheet" href="../../css/bulma.min.css">
-    <script src="../../helpers/collection.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <title>Genetic Alg Tutorial</title>
+    <link rel="stylesheet" href="../../../css/bulma.min.css">
     <style>
         .card-header-title,
         th {
             background-color: #00d1b2;
             color: white !important;
+        }
+
+        canvas {  
+           border: #00d1b2 solid;
+            
         }
     </style>
 </head>
@@ -22,13 +25,12 @@
     <section class="hero is-primary">
         <div class="hero-body">
             <p class="title">
-                Plot Examples
+                Ants Simulation
             </p>
             <p class="subtitle">
             </p>
         </div>
     </section>
-
     <section class="section">
         <div class="container">
             <div class="columns">
@@ -36,29 +38,24 @@
                     <div class="card">
                         <header class="card-header">
                             <p class="card-header-title has-primary">
-                                Line
+                               Simulation
                             </p>
                         </header>
                         <div class="card-content">
                             <div class="content">
-                               <canvas id="linearplot" style="border: 2px solid;border-radius: 5px;"></canvas>
+                               <canvas id="myCanvas" class="canvas"></canvas>                      
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>          
-    </section>   
-   <script src="plotlib.js"></script>
-    <script> 
-        var plot = new Plotter("linearplot");
-        plot.transformXY(); 
+            </div>
+        </div>
+    </section> 
+    <script src="/algorithms/simulations/ants/ant_simulation.js"></script> 
+    <script>
 
-        numPoints = 100;
-        const xPoints = Array(numPoints).fill(0).map(function(){return Math.random() * plot.xMax});
-        const yPoints = Array(numPoints).fill(0).map(function(){return Math.random() * plot.yMax});
-        plot.plotPoints(numPoints, xPoints, yPoints, "blue");   
-        plot.plotLine(0, 0, plot.xMax, plot.yMax, "red"); 
-    
+       
+
     </script>
 </body>
 

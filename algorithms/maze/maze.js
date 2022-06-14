@@ -131,17 +131,37 @@ function Maze(canvasControl, dimension, line_width){
           ctx.lineTo(Math.max(src.x, dest.x) + adjust, dest.y);
         }
         ctx.stroke();
-  
-        debugger;
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        await new Promise(resolve => setTimeout(resolve, 10));
       }
   
-      // console.log(graph);
-      // console.log(tree);
+      console.log("Result:");
+      console.log("END:"+end);
       // show start end end of maze
       paintIndex(ctx, start, 'lime', adjust, xStart, xSpace, yStart, ySpace);
       paintIndex(ctx, end, 'deepskyblue', adjust, xStart, xSpace, yStart, ySpace);
+
+      converToGraph(end);
     }
+
+    function converToGraph(end){
+      var graph = [];
+
+      for(let edge of tree){        
+         const [a, b] = edge;
+         if(!(a in graph)) graph[a] = {array: [], isEnd: false};
+         if(!(b in graph)) graph[b] = {array: [], isEnd: false};
+        graph[a].array.push(b);
+        graph[b].array.push(a);       
+      
+        if(a === end) graph[a].isEnd = true;
+        
+        else if(b === end) graph[b].isEnd = true;        
+      }      
+      console.log(graph);
+      return graph;
+    }
+   
   
     function paintIndex(ctx, index, color, adjust, xStart, xSpace, yStart, ySpace) {
       const { row, column } = toRowColumn(index);

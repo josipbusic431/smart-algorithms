@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genetic Alg Tutorial</title>
+    <link rel="stylesheet" href="../../../css/bulma.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <style>
+        .card-header-title,
+        th {
+            background-color: #00d1b2;
+            color: white !important;
+        }
+
+        canvas {
+            border: #00d1b2 solid;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <p class="title">
+                Random Walk
+            </p>
+            <p class="subtitle">
+            </p>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column">
+                    <div class="card">
+                        <header class="card-header">
+                            <p class="card-header-title has-primary">
+                                Simulation
+                            </p>
+                        </header>
+                        <div class="card-content">
+                            <div class="content">
+                                <button class="button" onclick="reset()">Start/Reset</button>
+                                <button class="button" onclick="stop()">Stop</button>
+                                <!-- <p id="status"></p> -->
+                                <input id="status" class="input" type="text" disabled />
+                                <p></p>
+                                <canvas id="myCanvas" class="canvas"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="columns">
+                <div class="column">
+                    <div class="card">
+                        <header class="card-header">
+                            <p class="card-header-title has-primary">
+                                Distribution
+                            </p>
+                        </header>
+                        <div class="card-content">
+                            <div class="content">
+                                <canvas id="myChart" class="canvas"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="/algorithms/simulations/randomWalk/simulation.js"></script>
+    <script src="/algorithms/simulations/randomWalk/distribution.js"></script>
+    <script src="../../../helpers/mychart.js"></script>
+    <script src="/helpers/utils.js"></script>
+    <script>
+        var status = "ENDED";
+        var iteration = 0;
+        var walker = undefined;
+        var interval = null;
+
+        var c = document.getElementById("myCanvas");
+        var w = c.width = window.innerWidth / 1.2,
+            h = c.height = window.innerHeight / 2;
+        ctx = c.getContext("2d");
+
+        function reset() {
+            ctx.fillStyle = "#00d1b2";
+            ctx.fillRect(0, 0, w, h);
+
+            walker = new Walker(ctx);
+            document.getElementById("status").value = "STARTED";
+            iteration = 0;
+            walker.initPosition(window.innerWidth / 1.2, window.innerHeight / 2);
+            interval = setInterval(iterate, 5);
+        };
+
+        function iterate() {
+            if (iteration >= 5000) {
+                clearInterval(interval);
+                document.getElementById("status").value = "ENDED";
+            }
+            walker.step();
+            walker.draw(ctx);
+            iteration++;
+        };
+
+        function stop() {
+            clearInterval(interval);
+            document.getElementById("status").value = "STOP";
+        };
+
+      
+
+        function distributionStart() {
+            var dc = document.getElementById("myChart");
+           
+        	var width = dc.width = window.innerWidth/1.2,
+            height = dc.height = h;
+            var ctx1 = dc.getContext("2d");
+
+            var d = new Distribution(10);
+            d.draw(100);
+          
+            const labels = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+            let data1 = new Dataset("distribution", d.randomCounts, "#00d1b2", "#00d1b2");
+            console.log(d.randomCounts);
+            var config = new MyChartConfig("bar", labels, [data1.json()]);
+
+            window.myChart = new Chart(dc, config.config());
+            window.myChart.render();
+        };
+        distributionStart();
+
+
+    </script>
+</body>
+
+</html>

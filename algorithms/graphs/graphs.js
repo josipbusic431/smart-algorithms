@@ -1,16 +1,16 @@
 //iterative
-// const depthFirstPrint = (graph, source) => {
-//     const stack = [ source ];
+const depthFirstPrint = (graph, source) => {
+    const stack = [ source ];
 
-//     while(stack.length > 0){
-//         const currnet = stack.pop();
-//         console.log(currnet);
+    while(stack.length > 0){
+        const currnet = stack.pop();
+        console.log(currnet);
 
-//         for(let neighbor of graph[currnet]){
-//             stack.push(neighbor);
-//         }
-//     }
-// }
+        for(let neighbor of graph[currnet]){
+            stack.push(neighbor);
+        }
+    }
+}
 
 //Recursive
 // const depthFirstPrint = (graph, source) => {
@@ -42,6 +42,7 @@ const graph = {
     f: []
 };
 
-//depthFirstPrint(graph, 'a');
-
+depthFirstPrint(graph, 'a');
+console.log("")
+console.log("")
 breadthFirstPrint(graph, 'a');

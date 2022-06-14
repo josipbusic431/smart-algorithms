@@ -1,4 +1,4 @@
-function GaMaze(maxIteration, mutationRate, crossoverRate, populationSize, genSize){
+function GaMaze(maxIteration, mutationRate, crossoverRate, populationSize, genSize, graph){
 
     //algoritham params
     let _maxIteration = maxIteration;
@@ -10,6 +10,7 @@ function GaMaze(maxIteration, mutationRate, crossoverRate, populationSize, genSi
     let _population = [];
     
     //data    
+    let _graph = graph;
 
     //graph properties
     let graphBest = [];
@@ -33,7 +34,7 @@ function GaMaze(maxIteration, mutationRate, crossoverRate, populationSize, genSi
 
     };
 
-    let fitness = function(candidate){
+    let fitness = function(candidate, ){
 
     };
 

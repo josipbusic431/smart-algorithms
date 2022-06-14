@@ -30,8 +30,7 @@ function ChaosGame(canvasControl){
             let randIndex = randomIndex(_points.length);
             let main = _points[randIndex];            
             let newPoint = calcNewPoint(main, point);
-            stack.push(newPoint);    
-            debugger;         
+            stack.push(newPoint);
         }        
     };
 

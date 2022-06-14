@@ -11,6 +11,9 @@ function Utils(){
     this.random =  function(){
         return Math.random();
     };
+    this.randomFloat = function(min, max){
+        return Math.random() * (max - min) + min;
+    };
     this.randomIntMax = function(max){
         return Math.floor(this.random() * max);
     };
